@@ -10,6 +10,7 @@ class ImageInline(admin.StackedInline):
 class CarAdmin(admin.ModelAdmin):
     inlines = [ImageInline]
     readonly_fields = ("user_view_count", )
+    list_display = ("marka",'model', "slug")
 
 
 admin.site.register(Car, CarAdmin)

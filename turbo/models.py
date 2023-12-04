@@ -156,3 +156,7 @@ class CarImages(DateMixin):
         verbose_name = "Car Image"
         verbose_name_plural = "Car Images"
 
+
+class Selections(DateMixin, SlugMixin):
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    cars = models.ManyToManyField(Car, verbose_name="Cars")

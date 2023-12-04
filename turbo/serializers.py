@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from turbo.models import Car, CarImages
 
+
 class CarSerializer(serializers.ModelSerializer):
     class Meta:
         model = Car
