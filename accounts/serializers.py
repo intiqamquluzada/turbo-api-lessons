@@ -5,7 +5,7 @@ User = get_user_model()
 
 
 class LoginSerializer(serializers.Serializer):
-    username = serializers.CharField()
+    email = serializers.EmailField()
     password = serializers.CharField(
         style={"input_type": "password"}, write_only=True, allow_blank=False
     )
@@ -15,8 +15,8 @@ class LoginSerializer(serializers.Serializer):
     #     fields = ("username", "password")
 
     def validate(self, attrs):
-        username = attrs.get("username")
-        user = User.objects.filter(username=username)
+        email = attrs.get("email")
+        user = User.objects.filter(email=email)
         password = attrs.get("password")
 
         if not user.exists():
@@ -31,27 +31,27 @@ class LoginSerializer(serializers.Serializer):
 
 
 class RegisterSerializer(serializers.ModelSerializer):
-    username = serializers.CharField()
+    email = serializers.EmailField()
     password = serializers.CharField(
         style={"input_type": "password"}, write_only=True, allow_blank=False
     )
 
     class Meta:
         model = User
-        fields = ("username", "password",)
+        fields = ("email", "password",)
 
     def validate(self, attrs):
-        username = attrs.get("username")
+        email = attrs.get("email")
         password = attrs.get("password")
 
-        if User.objects.filter(username=username).exists():
+        if User.objects.filter(email=email).exists():
             raise serializers.ValidationError({"error": "this user already registered"})
 
         return attrs
 
     def save(self):
         account = User(
-            username=self.validated_data['username'],
+            email=self.validated_data['email'],
 
 
         )
@@ -60,3 +60,8 @@ class RegisterSerializer(serializers.ModelSerializer):
         account.set_password(password) #sha256
         account.save()
         return account
+
+
+class VerifySerializer(serializers.Serializer):
+    email = serializers.EmailField()
+    otp = serializers.CharField()

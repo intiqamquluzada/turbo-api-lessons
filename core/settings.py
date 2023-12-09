@@ -67,6 +67,8 @@ TEMPLATES = [
 WSGI_APPLICATION = 'core.wsgi.application'
 
 
+AUTH_USER_MODEL = 'accounts.MyUser'
+
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
@@ -109,9 +111,6 @@ USE_I18N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.2/howto/static-files/
-
 STATIC_URL = 'static/'
 
 if DEBUG:
@@ -147,3 +146,11 @@ CORS_ALLOW_METHODS = [
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "quluzadintiqam@gmail.com"
+EMAIL_HOST_PASSWORD = 'sggavyswzmkluqjc'

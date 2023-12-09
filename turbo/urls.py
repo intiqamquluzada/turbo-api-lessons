@@ -8,6 +8,6 @@ urlpatterns = [
     path("images/", CarImagesListView.as_view(), name='images'),
     path("update/car/<slug>/", CarUpdateView.as_view(), name='car-update'),
     path("delete/car/<slug>/", DeleteCarView.as_view(), name='delete-car'),
-    path("/create/images/", CarImageCreate.as_view(), name='car-image-create'),
+    path("create/images/", CarImageCreate.as_view(), name='car-image-create'),
 
 ]
